@@ -31,7 +31,7 @@ I built the dashboard with a French UI, but the fields are easily customizable t
 
 The project includes many time-saving features, such as a dynamic SVG template and continuous deployment from Github to Cloud Run. 
 
-## [Follow the tutorial here](www.google.ca)
+## [Follow the tutorial here](https://malcolmosh.github.io/blog/2023/dasboardpi_tutorial/)
 
 > ### What you need 
 >* A Google Cloud Platform account with billing enabled    

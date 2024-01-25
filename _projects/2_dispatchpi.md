@@ -37,6 +37,8 @@ DispatchPi is built for a pair of picture frames, which we’ll call <strong>Sat
 </div>
 </div>
 
+## [Follow the tutorial here!](https://malcolmosh.github.io/blog/2023/dispatchpi_part1/)
+
 ### Full Schema
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
@@ -75,7 +77,7 @@ Using Google services like Gmail API and Google Cloud Run is not free. But pingi
   
 This tutorial covers the whole installation process, which is divided in four parts. For any direct questions, write me on [Github](https://github.com/malcolmosh) or on [Reddit](http://reddit.com/u/malcolm_osh). 
 
-- Part 1 : [Build a local app](https://malcolmosh.github.io/pages/DispatchPi/dispatchpi_part1/)
-- Part 2 : [Host your app online](https://malcolmosh.github.io/pages/DispatchPi/dispatchpi_part2/)
-- Part 3 : [Setup the e-ink frame](https://malcolmosh.github.io/pages/DispatchPi/dispatchpi_part3/)
-- Part 4 : [Create an iOS shortcut](https://malcolmosh.github.io/pages/DispatchPi/dispatchpi_part4/)
+- Part 1 : [Build a local app](https://malcolmosh.github.io/blog/2023/dispatchpi_part1/)
+- Part 2 : [Host your app online](https://malcolmosh.github.io/blog/2023/dispatchpi_part2/)
+- Part 3 : [Setup the e-ink frame](https://malcolmosh.github.io/blog/2023/dispatchpi_part3/)
+- Part 4 : [Create an iOS shortcut](https://malcolmosh.github.io/blog/2023/dispatchpi_part4/)

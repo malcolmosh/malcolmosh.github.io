@@ -6,6 +6,7 @@ last_modified_at: 2024-01-29 00:00:00-0500
 description: #an example of a blog post with table of contents on a sidebar
 tags: #formatting toc sidebar
 categories: DashboardPi
+published : false
 giscus_comments: false
 related_posts: false
 toc:
