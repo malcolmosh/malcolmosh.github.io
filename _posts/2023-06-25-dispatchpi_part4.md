@@ -1,10 +1,10 @@
 ---
 layout: post
-title: 'DispatchPi part 4 : an iOS shortcut 📱'
+title: "DispatchPi part 4 : an iOS shortcut 📱"
 date: 2023-06-25 12:00:00-0500
 last_modified_at: 2023-06-25 12:00:00-0500
 description: #an example of a blog post with table of contents on a sidebar
-tags: #formatting toc sidebar
+tags: raspberrypi
 categories: DispatchPi
 giscus_comments: false
 related_posts: false
@@ -12,9 +12,7 @@ toc:
   beginning: true
 ---
 
-
 ### Installing the shortcut
-
 
 <div class="row">
 
@@ -42,9 +40,8 @@ I hope you enjoyed this tutorial. Let me know on [Github](https://github.com/mal
 
 {% include scripts/image_with_caption.liquid src="/assets/img/dispatchpi/pink_frame_lowres.jpg" alt="The final result" caption="The assembled frame." height="400px" %}
 
-
 ### Further reading
 
-- [simplegmail](https://github.com/jeremyephron/simplegmail)  would be an alternative way of connecting to our Gmail inbox
+- [simplegmail](https://github.com/jeremyephron/simplegmail) would be an alternative way of connecting to our Gmail inbox
 - [A good explanation of the Gmail Python API](https://www.thepythoncode.com/article/use-gmail-api-in-python)
-- You could try replicating the whole server script in [N8N, an automation tool that ressembles Zapier](https://n8n.io/) 
+- You could try replicating the whole server script in [N8N, an automation tool that ressembles Zapier](https://n8n.io/)
