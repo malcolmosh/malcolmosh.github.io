@@ -31,7 +31,7 @@ I built the dashboard with a French UI, but the fields are easily customizable t
 
 The project includes many time-saving features, such as a dynamic SVG template and continuous deployment from Github to Cloud Run. 
 
-## [Follow the tutorial here](https://malcolmosh.github.io/blog/2023/dasboardpi_tutorial/)
+## [Follow the tutorial here](https://google.ca)
 
 > ### What you need 
 >* A Google Cloud Platform account with billing enabled    
@@ -74,7 +74,7 @@ All Google authentication is handled via Oauth 2.0 tokens, which can be generate
 
 The icons used by Environment Canada are pretty low resolution, and so I decided to pick a new set of icons and then match them one-to-one to the icon descriptiosn used by Environment Canada, which is no small feat! Try finding the difference between 'Light rain shower and flurries' (icon code 37) and 'A few wet flurries' (icon code 38)...
 
-I found the description of [each icon code here](https://dd.weather.gc.ca/citypage_weather/docs/) and painstackingly matched them to erikflowers' great [SVG iconset available here](https://github.com/erikflowers/weather-icons). My list of correspondences is [in the project repo here](www.google.ca) I then dropped in all SVG files as individual objects into my main SVG template and set their visibility to 'hidden'. The app scripts dynamically reveal the right weather icons depending on the forecast emitted by Environment Canada. 
+I found the description of [each icon code here](https://dd.weather.gc.ca/citypage_weather/docs/) and painstackingly matched them to erikflowers' great [SVG iconset available here](https://github.com/erikflowers/weather-icons). My list of correspondences is [in the project repo here](https://google.ca) I then dropped in all SVG files as individual objects into my main SVG template and set their visibility to 'hidden'. The app scripts dynamically reveal the right weather icons depending on the forecast emitted by Environment Canada. 
 
 <div class="row">
     <div class="col-sm mt-6 mt-md-0">
