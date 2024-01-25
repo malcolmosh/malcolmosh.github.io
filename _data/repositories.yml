@@ -1,12 +1,7 @@
 github_users:
-  - torvalds
-  - alshedivat
+  - malcolmosh
 
 github_repos:
-  - alshedivat/al-folio
-  - twbs/bootstrap
-  - jekyll/jekyll
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - jpswalsh/academicons
-  - mathjax/MathJax
+  - malcolmosh/dashboard_pi
+  - malcolmosh/dispatchPi
+  - malcolmosh/OptimisateurSalle_Roomoptimizer
