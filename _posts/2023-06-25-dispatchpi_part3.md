@@ -137,7 +137,7 @@ The script will ping your Cloud Run app and retrieve the image intended for the 
 The last step is our automate the script so that it runs at fixed intervals. We’ll use cron, a time-based job scheduler in Unix-like computer operating systems. A cron table is a text file that contains a list of commands meant to be run at specified times.
   
 For more info on cron :    
-* [How to run and schedule Python scripts on Raspberry Pi](https://www.digikey.com/en/maker/tutorials/2023/how-to-schedule-tasks-on-a-raspberry-pi)  
+* [How to run and schedule Python scripts on Raspberry Pi](https://bc-robotics.com/tutorials/setting-cron-job-raspberry-pi/)  
 * [How to Run a Python Script on a Raspberry Pi at Startup](https://www.circuitbasics.com/starting-programs-automatically-using-cron-on-a-raspberry-pi/)
  
 In the terminal, type `sudo crontab -e` to open the crontab file. If you are asked to pick an editor, select the first option (nano). 
