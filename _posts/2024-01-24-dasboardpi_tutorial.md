@@ -41,8 +41,7 @@ Follow the steps described in DispatchPi to test the app locally and then deploy
   * Create a new .env file with the same variables
   * Add coordinates for canadian weather provided from Environment Canada
   * Flask key can be any random string
-  * SERVICE_ACCOUNT_CREDENTIALS is the GCP service account json string you downloaded earlier
-  * TOKEN_GMAIL, TOKEN_GTASKS and TOKEN_GCALENDAR will be generated through the script when you authorize your GCP app to have access to Gmail, Google tasks and Google calendar. 
+
   * These token files will be located in the secrets/ subfolder as individual JSON file. You can copy each JSON string individually into the appropriate variable in the .env file
   * Then safely delete these json token files, they will not be needed anymore
   * The app will take care of refreshing these access tokens on the fly
@@ -61,6 +60,30 @@ tinker with language
 
 editing the svg template was fussy. use boxysvg to preserve class names
 the layer names in the svg are used in the svg updater script
+
+
+## Authentication
+
+  * SERVICE_ACCOUNT_CREDENTIALS is the GCP service account json string you downloaded earlier
+  * TOKEN_GMAIL, TOKEN_GTASKS and TOKEN_GCALENDAR will be generated through the script when you authorize your GCP app to have access to Gmail, Google tasks and Google calendar. 
+
+The CLIENT_SECRETS_FILE and TOKEN_FILE serve different purposes in the context of OAuth 2.0 authentication:
+
+CLIENT_SECRETS_FILE: This file contains the OAuth 2.0 credentials for your application, including the client ID and client secret. These values are used to identify your application when it makes requests to the OAuth 2.0 server. You obtain these values when you register your application with the service you're trying to authenticate with (in this case, Google).
+
+TOKEN_FILE: This file contains the access and refresh tokens that your application receives from the OAuth 2.0 server. The access token is used to authenticate API requests on behalf of the user. The refresh token is used to obtain a new access token when the current one expires. These tokens are obtained when the user completes the OAuth 2.0 authorization flow.
+
+In summary, the CLIENT_SECRETS_FILE is used to identify your application to the OAuth 2.0 server, and the TOKEN_FILE is used to authenticate API requests on behalf of the user.
+
+
+## Generating each token
+
+Click on each service test
+
+Note : gmail not used in the dashboard. Just left for future use. 
+Copy the token to the env file
+Restart the app (important! Env variables are only loaded once you start the app for the first time)
+
 
 ## Storing env variables
 
