@@ -1,9 +1,9 @@
 name: Deploy site
 
 on:
-  #workflow_run:
-    #workflows: [Check for broken links] # Don't make this compulsory
-    #types: [completed]
+  workflow_run:
+    workflows: [Check for broken links] # Don't make this compulsory
+    types: [completed]
   workflow_dispatch:
 
 permissions:
