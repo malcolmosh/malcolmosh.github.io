@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: page #
 title: DispatchPi
 description: Share and queue eink images through Gmail
 img: /assets/img/dispatchpi/pink_frame2_thumbnail.jpg
