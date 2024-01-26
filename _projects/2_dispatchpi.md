@@ -26,12 +26,12 @@ related_publications: false
 
 <div class="col-sm-8 mt-3 mt-md-0">
 I built DispatchPi to share pictures with my fiancée, who was working in Québec's remote Nunavik region, where internet is unreliable. The project consists of a pair of e-ink frames that fetch images from a Gmail inbox.
-<br> <br>
+<br>
 Each frame is powered by a Raspberry Pi Zero and hooked up to a 7.5 inch Waveshare e-ink screen. Their job is to pull an image from a fixed URL at regular intervals. To exchange images, each sender uses a custom shortcut on iPhones. 
-<br><br>
+<br>
 DispatchPi is built for a pair of picture frames, which we’ll call <strong>Satellite frame</strong> and <strong>Earth frame</strong>. The satellite frame displays images received from any sender, while the earth frame only shows from a specific sender. This filtering happens in the web app which serves each audience on a different URL endpoint. 
-
-## [Follow the tutorial here!](https://malcolmosh.github.io/blog/2023/dispatchpi_part1/)
+<br><br>
+<span style="font-size: 40px;"><a href="https://malcolmosh.github.io/blog/2023/dispatchpi_part1/">Start the tutorial here!</a></span>
 </div>
 
 <div class="col-sm-4 mt-3 mt-md-0" >
@@ -61,17 +61,15 @@ DispatchPi is built for a pair of picture frames, which we’ll call <strong>Sat
 4. The Pi attached to the frame downloads the image from the URL and pushes it to the e-ink screen.
 5. Done!
 
-> ### What you need
->
-> - A Google Cloud Platform account with billing enabled
-> - A pair of Raspberry Pi Wero W with empty microSD cards
+### What you need
 
+- A Google Cloud Platform account with billing enabled
+- A pair of Raspberry Pi Wero W with empty microSD cards
     * You can find the [Pi Zero board on Amazon here](https://www.amazon.ca/Raspberry-Pi-Zero-W/dp/B06XFZC3BX/ref=sr_1_3?crid=3ALT2S14BD8S2&keywords=raspberry+pi+zero+w&qid=1706153826&sprefix=raspberry+pi+zero+w%252Caps%252C85&sr=8-3&_encoding=UTF8&tag=57a5dad807324-20&linkCode=ur2&linkId=8d8b26c8cf3feaa32f56eca526592423&camp=15121&creative=330641), although the price might be better at smaller local retailers, such as [here on PiShop.ca](https://www.pishop.ca/product/raspberry-pi-zero-w/?ref=272efi4f)
     * I bought the board without headers and added GPIO headers with a [solderless hammer header kit](https://www.pishop.ca/product/gpio-hammer-header-solderless-male-female-installation-jig/?ref=272efi4f), as I didn't feel like fussing over soldering
-    * This [pair of Sandisk 32GB microSD cards](https://www.amazon.ca/SanDisk-2-Pack-microSDHC-Memory-2x32GB/dp/B08J4HJ98L/ref=sr_1_8?crid=1UUURHEV2I772&keywords=sandisk+microsd&qid=1706153988&sprefix=sandisk+microsd%252Caps%252C82&sr=8-8&_encoding=UTF8&tag=57a5dad807324-20&linkCode=ur2&linkId=c4ad64dabb854c625a68ad48a238521b&camp=15121&creative=330641) should work fine for the project
-
-> - Two [Waveshare 7.5” e-ink screens for Raspberry pi ](https://www.amazon.ca/Waveshare-7-5inch-HAT-Raspberry-Consumption/dp/B075R4QY3L/ref=sr_1_3?crid=2V6TDL93DY3AX&keywords=waveshare+7.5&qid=1706153772&sprefix=waveshare+7+5%252Caps%252C81&sr=8-3&_encoding=UTF8&tag=57a5dad807324-20&linkCode=ur2&linkId=17b52fc2f91a0ffcbfcdd86762cb4328&camp=15121&creative=330641)
-> - A computer to configure the Raspberry Pi microSD cards and run terminal commands (I'm using a Macbook)
+    * This [pair of Sandisk 32GB microSD cards](https://www.amazon.ca/SanDisk-2-P   ack-microSDHC-Memory-2x32GB/dp/B08J4HJ98L/ref=sr_1_8?crid=1UUURHEV2I772&keywords=sandisk+microsd&qid=1706153988&sprefix=sandisk+microsd%252Caps%252C82&sr=8-8&_encoding=UTF8&tag=57a5dad807324-20&linkCode=ur2&linkId=c4ad64dabb854c625a68ad48a238521b&camp=15121&creative=330641) should work fine for the project
+- Two [Waveshare 7.5” e-ink screens for Raspberry pi ](https://www.amazon.ca/Waveshare-7-5inch-HAT-Raspberry-Consumption/dp/B075R4QY3L/ref=sr_1_3?crid=2V6TDL93DY3AX&keywords=waveshare+7.5&qid=1706153772&sprefix=waveshare+7+5%252Caps%252C81&sr=8-3&_encoding=UTF8&tag=57a5dad807324-20&linkCode=ur2&linkId=17b52fc2f91a0ffcbfcdd86762cb4328&camp=15121&creative=330641)
+- A computer to configure the Raspberry Pi microSD cards and run terminal commands (I'm using a Macbook)
 
 ### A note on cost
 

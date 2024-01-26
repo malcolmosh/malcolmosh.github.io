@@ -25,9 +25,34 @@ Weather icons from X library matched to Environment Canada weather icons (low re
 
 Follow the steps described in DispatchPi to test the app locally and then deploy to CloudRun. Feel free to open an issue on the GH repo if you are encountering any difficulties.
 
-## An SVG template
+## How to replicate the project
 
-Use boxysvg to preserve attribute names.
+- Install the scripts located in the "screen" subfolder of the repo on the Raspberry Pi.
+- Follow the setup instructions outlined in the DispatchPi tutorial
+
+
+- Set up the project in GCP
+- Create service account, download credentials
+
+- Test the web app located in the 'server' subfolder locally.
+- Install requirements.txt
+- Provide configuration options in the .env file
+  * Use the .env.example as blueprint
+  * Create a new .env file with the same variables
+  * Add coordinates for canadian weather provided from Environment Canada
+  * Flask key can be any random string
+  * SERVICE_ACCOUNT_CREDENTIALS is the GCP service account json string you downloaded earlier
+  * TOKEN_GMAIL, TOKEN_GTASKS and TOKEN_GCALENDAR will be generated through the script when you authorize your GCP app to have access to Gmail, Google tasks and Google calendar. 
+  * These token files will be located in the secrets/ subfolder as individual JSON file. You can copy each JSON string individually into the appropriate variable in the .env file
+  * Then safely delete these json token files, they will not be needed anymore
+  * The app will take care of refreshing these access tokens on the fly
+
+
+- Spin up the app with streamlit run server/main.py
+- Test each sub-service separately to let your GCP app access these services through the email account of your choice, thus generating tokens in the secrets/ subfolder
+- Important : do not commit these tokens to a Github repo! 
+- Edit the scripts as you see fit to change the language display
+
 
 parameters to tune :
 build token files

@@ -22,7 +22,7 @@ quelques tutoriels et réflexions sur la technologie!
 
 I’m a data scientist from Montréal especially interested in language and AI techniques applied to text. I thrive on building things and piecing together projects block by block. This miscrosite contains a few hobby projects and thoughts about tech.
 
-My degrees:
+My studies:
 
 - Bachelors in music (Université de Montréal) 🎼
 - Masters in arts management (HEC Montréal) 🖼️

@@ -2,7 +2,7 @@
 layout: page
 title: DashboardPi
 description: Check Google calendar, tasks and canadian weather
-img: /assets/img/dashboardpi/dashboardpi_main.jpeg
+img: /assets/img/dashboardpi/alternate_splash_image.jpg
 importance: 1
 category: work
 related_publications: false
@@ -31,19 +31,18 @@ I built the dashboard with a French UI, but the fields are easily customizable t
 
 The project includes many time-saving features, such as a dynamic SVG template and continuous deployment from Github to Cloud Run.
 
-## [Follow the tutorial here](https://google.ca)
+## [Start the tutorial here](https://google.ca)
 
-> ### What you need
->
-> - A Google Cloud Platform account with billing enabled
-> - A pair of Raspberry Pi zero W with empty microSD cards
+### What you need
 
+
+- A Google Cloud Platform account with billing enabled
+- A pair of Raspberry Pi zero W with empty microSD cards
     * You can find the [Pi Zero board on Amazon here](https://www.amazon.ca/Raspberry-Pi-Zero-W/dp/B06XFZC3BX/ref=sr_1_3?crid=3ALT2S14BD8S2&keywords=raspberry+pi+zero+w&qid=1706153826&sprefix=raspberry+pi+zero+w%252Caps%252C85&sr=8-3&_encoding=UTF8&tag=57a5dad807324-20&linkCode=ur2&linkId=8d8b26c8cf3feaa32f56eca526592423&camp=15121&creative=330641), although the price might be better at smaller local retailers, such as [here on PiShop.ca](https://www.pishop.ca/product/raspberry-pi-zero-w/?ref=272efi4f)
     * I bought the board without headers and added GPIO headers with a [solderless hammer header kit](https://www.pishop.ca/product/gpio-hammer-header-solderless-male-female-installation-jig/?ref=272efi4f), as I didn't feel like fussing over soldering
     * This [pair of Sandisk 32GB microSD cards](https://www.amazon.ca/SanDisk-2-Pack-microSDHC-Memory-2x32GB/dp/B08J4HJ98L/ref=sr_1_8?crid=1UUURHEV2I772&keywords=sandisk+microsd&qid=1706153988&sprefix=sandisk+microsd%252Caps%252C82&sr=8-8&_encoding=UTF8&tag=57a5dad807324-20&linkCode=ur2&linkId=c4ad64dabb854c625a68ad48a238521b&camp=15121&creative=330641) should work fine for the project
-
-> - Two [Waveshare 7.5” e-ink screens for Raspberry pi ](https://www.amazon.ca/Waveshare-7-5inch-HAT-Raspberry-Consumption/dp/B075R4QY3L/ref=sr_1_3?crid=2V6TDL93DY3AX&keywords=waveshare+7.5&qid=1706153772&sprefix=waveshare+7+5%252Caps%252C81&sr=8-3&_encoding=UTF8&tag=57a5dad807324-20&linkCode=ur2&linkId=17b52fc2f91a0ffcbfcdd86762cb4328&camp=15121&creative=330641)
-> - A computer to configure the Raspberry Pi microSD cards and run terminal commands (I'm using a Macbook)
+- One [Waveshare 7.5” e-ink screen for Raspberry pi ](https://www.amazon.ca/Waveshare-7-5inch-HAT-Raspberry-Consumption/dp/B075R4QY3L/ref=sr_1_3?crid=2V6TDL93DY3AX&keywords=waveshare+7.5&qid=1706153772&sprefix=waveshare+7+5%252Caps%252C81&sr=8-3&_encoding=UTF8&tag=57a5dad807324-20&linkCode=ur2&linkId=17b52fc2f91a0ffcbfcdd86762cb4328&camp=15121&creative=330641)
+- A computer to configure the Raspberry Pi microSD card and run terminal commands (I'm using a Macbook, but powershell on Windows works much the same!)
 
 ### How it works
 
@@ -53,10 +52,10 @@ I created the SVG template from scratch in Adobe Illustrator, matching the frame
 
 <div class="row">
     <div class="col-sm mt-6 mt-md-0">
-        {% include figure.liquid path="assets/img/dashboardpi/blank_template.png" title="example image" class="img-fluid rounded z-depth-1" zoomable=true %}
+        {% include figure.liquid path="assets/img/dashboardpi/blank_template_lowres.png" title="example image" class="img-fluid rounded z-depth-1" zoomable=true %}
     </div>
     <div class="col-sm mt-6 mt-md-0">
-        {% include figure.liquid path="assets/img/dashboardpi/filled_out_template.png" title="example image" class="img-fluid rounded z-depth-1" zoomable=true %}
+        {% include figure.liquid path="assets/img/dashboardpi/filled_out_template_lowres.png" title="example image" class="img-fluid rounded z-depth-1" zoomable=true %}
     </div>
 </div>
 <div class="caption">
