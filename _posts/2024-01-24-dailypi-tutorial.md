@@ -13,7 +13,7 @@ toc:
   beginning: true
 ---
 
-**The code for DailyPi is available on [GitHub](https://github.com/malcolmosh/dailypi).**
+**The [code for DailyPi is available here on GitHub](https://github.com/malcolmosh/dailypi).**
 
 DailyPi is a simple e-paper dashboard that lists daily events, tasks and weather. 
 

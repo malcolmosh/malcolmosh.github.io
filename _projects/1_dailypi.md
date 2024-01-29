@@ -25,13 +25,13 @@ related_publications: false
 
 DailyPi is a straightforward home dashboard that shows daily tasks, events and weather on a 7.5 inch e-paper screen. All of the data preparation is conducted server-side, through a web app hosted on Google Cloud Run, which collects information from all relevant APIs and outputs a PNG image at a fixed URL. The local device is composed of a a Raspberry Pi zero W computer physically wired to an e-ink screen. The Pi's task is to regurlarly pull the dasbhoard PNG via Wifi and push it instantly to the display.
 
+**The [code for DailyPi is available here on GitHub](https://github.com/malcolmosh/dailypi).**
+
 To make the device portable, I connected it to a external battery, a [PiSugar2 battery](https://www.tindie.com/products/pisugar/pisugar-2-battery-for-raspberry-pi-zero/) that connects directly to the Pi's board and lets you connect other components, such as HATs. With three refreshes a day and a wake time of two minutes, I am able to make the battery last roughly 2.5 weeks. The really cool thing about e-paper is that any image will continue displaying even without power, as the panel is made up of thousands of physical microcapsules of pigment that are physically reshuffled around by electricty. 
 
 This is my second real e-ink project, and I aimed to make everything as simple as possible to maintain. I implemented a few time-saving features, such as a dynamic SVG template and continuous deployment from Github to Cloud Run.
 
 I built the dashboard with a French UI, but the fields are easily customizable through code by swapping variable names here and there.
-
-**The code for DailyPi is available on [GitHub](https://github.com/malcolmosh/dailypi).**
 
 ## [Start the tutorial here](/blog/2024/dailypi-tutorial/)
 
