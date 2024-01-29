@@ -31,6 +31,7 @@ This is my second real e-ink project, and I aimed to make everything as simple a
 
 I built the dashboard with a French UI, but the fields are easily customizable through code by swapping variable names here and there.
 
+**The code for DailyPi is available on [GitHub](https://github.com/malcolmosh/dailypi).**
 
 ## [Start the tutorial here](/blog/2024/dailypi-tutorial/)
 

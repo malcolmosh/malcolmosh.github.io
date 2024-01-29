@@ -13,6 +13,8 @@ toc:
   beginning: true
 ---
 
+**The code for DailyPi is available on [GitHub](https://github.com/malcolmosh/dailypi).**
+
 DailyPi is a simple e-paper dashboard that lists daily events, tasks and weather. 
 
 All data is prepared for display through a python app using the flask web framework. This web service ouputs a black and white PNG image that conforms to the exact dimensions of the e-paper screen. 
