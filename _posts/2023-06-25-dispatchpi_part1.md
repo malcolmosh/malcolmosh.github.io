@@ -71,6 +71,8 @@ Select “Web application” as the application type. Edit the name if you’d l
 
 {% include scripts/image_with_caption.liquid src="/assets/img/dispatchpi/tutorial_image/7.%20OAuth%20client%20id.png" alt="Web application type" caption="Web application type" %}
 
+### Add authorized redirects
+
 > ##### WARNING
 >
 > This step is important. Doing it right will spare you many a headache.

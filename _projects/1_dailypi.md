@@ -1,8 +1,8 @@
 ---
 layout: page
-title: DashboardPi
-description: Check Google calendar, tasks and canadian weather
-img: /assets/img/dashboardpi/alternate_splash_image.jpg
+title: DailyPi
+description: Get daily tasks, events and weather on e-paper
+img: /assets/img/dailypi/alternate_splash_image.jpg
 importance: 1
 category: work
 related_publications: false
@@ -10,29 +10,31 @@ related_publications: false
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/dashboardpi/dashboardpi_assembly.jpeg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/img/dailypi/dashboardpi_assembly.jpeg" title="Assembly process." class="img-fluid rounded z-depth-1" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/dashboardpi/dashboardpi_table.jpeg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/img/dailypi/dashboardpi_table.jpeg" title="Assembly process." class="img-fluid rounded z-depth-1" %}
     </div>
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/dashboardpi/dashboardpi_back_table.jpeg" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/img/dailypi/dashboardpi_back_table.jpeg" title="Assembly process." class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
     The assembly process.
 </div>
 
-DashboardPi is a straightforward home dashboard that displays daily tasks, events and weather on a 7.5 inch e-ink screen. Much like my previous e-ink project, DispatchPi, the heavy lifting is done through a web app hosted on Google Cloud Run, whose job is to prepare the image for display, which is then picked up by a small Raspberry Pi zero W computer and sent over a wired connection to the e-ink panel.
+DailyPi is a straightforward home dashboard that shows daily tasks, events and weather on a 7.5 inch e-paper screen. All of the data preparation is conducted server-side, through a web app hosted on Google Cloud Run, which collects information from all relevant APIs and outputs a PNG image at a fixed URL. The local device is composed of a a Raspberry Pi zero W computer physically wired to an e-ink screen. The Pi's task is to regurlarly pull the dasbhoard PNG via Wifi and push it instantly to the display.
 
-The Raspberry Pi wakes up twice a day to refresh the display, and then promptly shuts down. Power is supplied through a 1200mAh [PiSugar2 battery](https://www.tindie.com/products/pisugar/pisugar-2-battery-for-raspberry-pi-zero/) connected directly to the Pi Zero's board.
+To make the device portable, I connected it to a external battery, a [PiSugar2 battery](https://www.tindie.com/products/pisugar/pisugar-2-battery-for-raspberry-pi-zero/) that connects directly to the Pi's board and lets you connect other components, such as HATs. With three refreshes a day and a wake time of two minutes, I am able to make the battery last roughly 2.5 weeks. The really cool thing about e-paper is that any image will continue displaying even without power, as the panel is made up of thousands of physical microcapsules of pigment that are physically reshuffled around by electricty. 
 
-Everything has been built to be as simple as possible to maintain. The project includes many time-saving features, such as a dynamic SVG template and continuous deployment from Github to Cloud Run.
+This is my second real e-ink project, and I aimed to make everything as simple as possible to maintain. I implemented a few time-saving features, such as a dynamic SVG template and continuous deployment from Github to Cloud Run.
 
 I built the dashboard with a French UI, but the fields are easily customizable through code by swapping variable names here and there.
 
 
-## [Start the tutorial here](https://google.ca)
+## [Start the tutorial here](/blog/2024/dailypi-tutorial/)
+
+<br><br>
 
 ### What you need
 
@@ -47,16 +49,18 @@ I built the dashboard with a French UI, but the fields are easily customizable t
 
 ### How it works
 
-The main concept underpinning this project was to aim for simplicity and flexiblity around the UI. I didn't want to custom code complex html or CSS classes. Instead, the UI is served through an SVG template. As an SVG file can both be opened as an image or as code, it has the advantage of allowing dynamic field updates, to drop in new data on the fly. This idea is already present in quite a few e-ink projects, such as [Mendhak's e-paper dashboard](https://code.mendhak.com/raspberrypi-epaper-dashboard/), [Sevesalm's e-ink weather display](https://github.com/sevesalm/eInk-weather-display) and [r-mathieu's train map display](https://github.com/r-mathieu/E-Ink-Trainstation).
+I know how time-consuming tech projects can be - it always takes longer than we imagine to properly build what one has in mind, along with all of the tedious debugging this entails. I've come across lots of smart devices that are true labours of love. Considering this, I aimed to construct a flexible app that would remain simple to develop and maintain. 
+
+For the UI, I didn't want to custom code complex html or CSS classes. Instead, a SVG file forms the backbone of the dashboard. As this file format can both be opened as an image or as code, it has the advantage of allowing dynamic field updates, to drop in new data on the fly. This idea is already present in quite a few e-ink projects, such as [Mendhak's e-paper dashboard](https://code.mendhak.com/raspberrypi-epaper-dashboard/), [Sevesalm's e-ink weather display](https://github.com/sevesalm/eInk-weather-display) and [r-mathieu's train map display](https://github.com/r-mathieu/E-Ink-Trainstation).
 
 I created the SVG template from scratch in Adobe Illustrator, matching the frame's resolution (800 x 480 pixels). I then formatted all of the object fields and names by manipulating the SVG code in Vscode. An online editor such as [BoxySVG](https://boxy-svg.com/) can be especially useful to update the SVG graphics without messing up the order of the code and the custom object names. Alternating between Adobe Illustrator and Vscode is often destructive, since Illustrator will re-order the code and wipe out your custom code changes.
 
 <div class="row">
     <div class="col-sm mt-6 mt-md-0">
-        {% include figure.liquid path="assets/img/dashboardpi/blank_template_lowres.png" title="example image" class="img-fluid rounded z-depth-1" zoomable=true %}
+        {% include figure.liquid path="assets/img/dailypi/blank_template_lowres.png" title="example image" class="img-fluid rounded z-depth-1" zoomable=true %}
     </div>
     <div class="col-sm mt-6 mt-md-0">
-        {% include figure.liquid path="assets/img/dashboardpi/filled_out_template_lowres.png" title="example image" class="img-fluid rounded z-depth-1" zoomable=true %}
+        {% include figure.liquid path="assets/img/dailypi/filled_out_template_lowres.png" title="example image" class="img-fluid rounded z-depth-1" zoomable=true %}
     </div>
 </div>
 <div class="caption">
@@ -65,13 +69,13 @@ I created the SVG template from scratch in Adobe Illustrator, matching the frame
 
 ### The data
 
-All data is pulled from three sources :
+The dashboard's data is pulled from three sources :
 
 - Google Calendar, for daily events
-- Google Tasks, for grocery lists
+- Google Tasks, for grocery/to-do lists
 - [Environment Canada](https://weather.gc.ca/canada_e.html), for weather forecasts, through the [amazing env_canada library](https://github.com/michaeldavie/env_canada) built by MichaelDavie. Basically, this is a wrapper that interprets the XML information published for local weather stations multiple times per day ([here is Châteauguay's page, for example](https://dd.weather.gc.ca/citypage_weather/xml/QC/s0000050_e.xml)).
 
-All Google authentication is handled via Oauth 2.0 tokens, which can be generated during testing and then refreshed automatically as need be.
+All Google authentication is handled via Oauth 2.0 tokens, which can be generated during testing and then refreshed automatically server-side. 
 
 ### Weather icons
 
@@ -81,10 +85,10 @@ I found the description of [each icon code here](https://dd.weather.gc.ca/citypa
 
 <div class="row">
     <div class="col-sm mt-6 mt-md-0">
-        {% include figure.liquid path="assets/img/dashboardpi/33-cloudynight.gif" title="example image" class="img-fluid rounded z-depth-1" height="150px" %}
+        {% include figure.liquid path="assets/img/dailypi/33-cloudynight.gif" title="example image" class="img-fluid rounded z-depth-1" height="150px" %}
     </div>
     <div class="col-sm mt-6 mt-md-0">
-        {% include figure.liquid path="assets/img/dashboardpi/night-alt-cloudy.jpg" title="example image" class="img-fluid rounded z-depth-1" height="150px" %}
+        {% include figure.liquid path="assets/img/dailypi/night-alt-cloudy.jpg" title="example image" class="img-fluid rounded z-depth-1" height="150px" %}
     </div>
 </div>
 <div class="caption">
