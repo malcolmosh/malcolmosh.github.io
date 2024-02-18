@@ -1,7 +1,7 @@
 ---
 layout: page
 title: DailyPi
-description: Get daily tasks, events and weather on e-paper
+description: Daily tasks, events & weather on a battery-powered e-paper frame
 img: /assets/img/dailypi/alternate_splash_image.jpg
 importance: 1
 category: work
@@ -23,19 +23,19 @@ related_publications: false
     The assembly process.
 </div>
 
-DailyPi is a straightforward home dashboard that shows daily tasks, events and weather on a 7.5 inch e-paper screen. All of the data preparation is conducted server-side, through a web app hosted on Google Cloud Run, which collects information from all relevant APIs and outputs a PNG image at a fixed URL. The local device is composed of a a Raspberry Pi zero W computer physically wired to an e-ink screen. The Pi's task is to regurlarly pull the dasbhoard PNG via Wifi and push it instantly to the display.
+DailyPi is a straightforward home dashboard that shows daily tasks, events and weather on a 7.5 inch e-paper screen. I wanted to have a small, unobtrustive frame that would give me the day's info at a glance. 
 
-**The [code for DailyPi is available here on GitHub](https://github.com/malcolmosh/dailypi).**
+All of the data preparation is conducted server-side, through a web app hosted on Google Cloud Run, which collects information from multiple APIs and outputs a PNG image at a fixed URL. The local device is composed of a Raspberry Pi zero W computer physically wired to an e-ink screen. The Pi's task is to regularly refresh its PNG image by pulling it from the server.
 
-To make the device portable, I connected it to a external battery, a [PiSugar2 battery](https://www.tindie.com/products/pisugar/pisugar-2-battery-for-raspberry-pi-zero/) that connects directly to the Pi's board and lets you connect other components, such as HATs. With three refreshes a day and a wake time of two minutes, I am able to make the battery last roughly 2.5 weeks. The really cool thing about e-paper is that any image will continue displaying even without power, as the panel is made up of thousands of physical microcapsules of pigment that are physically reshuffled around by electricty. 
+> The **[code for DailyPi is available here on GitHub](https://github.com/malcolmosh/dailypi).** and you can **[start the tutorial here](/blog/2024/dailypi-tutorial/)**. 
+
+{% include scripts/image_with_caption.liquid src="/assets/img/dailypi/secondary_splash.jpg" alt="Everything at a glance" caption="Everything at a glance (in French!)" %}
+
+To make the device portable, I connected it to an external battery, a [PiSugar2 battery](https://www.tindie.com/products/pisugar/pisugar-2-battery-for-raspberry-pi-zero/) that plugs in directly to the Pi's board and lets you connect other components, such as HATs. With three refreshes a day and a wake time of two minutes, I am able to make the battery last roughly 2.5 weeks. The really cool thing about e-paper is that any image will continue displaying even without power, as the panel is made up of thousands of physical microcapsules of pigment that are physically reshuffled around by electricty. 
 
 This is my second real e-ink project, and I aimed to make everything as simple as possible to maintain. I implemented a few time-saving features, such as a dynamic SVG template and continuous deployment from Github to Cloud Run.
 
-I built the dashboard with a French UI, but the fields are easily customizable through code by swapping variable names here and there.
-
-## [Start the tutorial here](/blog/2024/dailypi-tutorial/)
-
-<br><br>
+I made the dashboard's interface in French, but the fields could easily be customized through code by swapping variable names.
 
 ### What you need
 
@@ -82,7 +82,7 @@ All Google authentication is handled via Oauth 2.0 tokens, which can be generate
 
 The icons used by Environment Canada are pretty low resolution, and so I decided to pick a new set of icons and then match them one-to-one to the icon descriptiosn used by Environment Canada, which is no small feat! Try finding the difference between 'Light rain shower and flurries' (icon code 37) and 'A few wet flurries' (icon code 38)...
 
-I found the description of [each icon code here](https://dd.weather.gc.ca/citypage_weather/docs/) and painstackingly matched them to erikflowers' great [SVG iconset available here](https://github.com/erikflowers/weather-icons). My list of correspondences is [in the project repo here](https://google.ca) I then dropped in all SVG files as individual objects into my main SVG template and set their visibility to 'hidden'. The app scripts dynamically reveal the right weather icons depending on the forecast emitted by Environment Canada.
+I found the description of [each icon code here](https://dd.weather.gc.ca/citypage_weather/docs/) and painstakingly matched them to erikflowers' great [SVG iconset available here](https://github.com/erikflowers/weather-icons). My indexing file is [in the project repo here](https://github.com/malcolmosh/dailypi/blob/master/Weather_icon_correspondence.xlsx) I then dropped in all SVG files as individual objects into my main SVG template and set their visibility to 'hidden'. The app scripts dynamically reveal the right weather icons depending on the forecast emitted by Environment Canada.
 
 <div class="row">
     <div class="col-sm mt-6 mt-md-0">

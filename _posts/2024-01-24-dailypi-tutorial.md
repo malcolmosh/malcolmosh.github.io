@@ -21,7 +21,7 @@ All data is prepared for display through a python app using the flask web framew
 
 To make development easier, I run the app on a Cloud service, Google Cloud Run. A Raspberry Pi Zero W connected to a Waveshare 7.5 in e-ink screen picks up the dashboard image and sends it to the frame for immediate display. 
 
-Data comes from three shources : 
+Data comes from three sources : 
 - Google tasks, for the grocery list (via an API call)
 - Google calendar, for all events (via an API call)
 - Environment Canada, through the [env_canada library](https://github.com/michaeldavie/env_canada)
@@ -51,7 +51,8 @@ All server code is located in the "server" subfolder of the repo, while the devi
 - Screen 
   - `display.py` : Contains the code to pull the PNG image from a fixed URL and display it on the e-ink screen
   - `image_transform_local.py` : In case the app cannot pull the PNG dashboard image from the URL, this script will display a local image instead.
-  - `wave_script.sh` : Bash script to schedule the next wakeup time for the PiSugar2 RTC (real-time clock) module
+  - `alarm.sh` : Bash script to schedule the next wakeup time for the PiSugar2 RTC (real-time clock) module
+  - `display.sh` : Bash script to execute a bunch of steps : sync the Pi's clock, schedule the next wake-up alarm and run the display.py script
   - `pics/` : Place local images here for random display if the app cannot pull the PNG dashboard from the URL
 
 ## Customization 
@@ -103,7 +104,7 @@ In summary, the CLIENT_SECRETS_FILE is used to identify your application to the 
 
 ## Test the app locally
 
-- Spin up the Flask app with `streamlit run server/main.py`
+- Spin up the Flask app with `python server/main.py`
   - The terminal will indicate which URL you should head to - typically, it's `http://localhost:8080`
 
 
@@ -137,13 +138,13 @@ You now need to generate the access tokens for Google Tasks and Google Calendar 
 
 ## Deploy easily on Cloud Run
 
-To simplify the app's web development, I'm using continuous deployment from the Github repo to Google Cloud Platform's Cloud Run service. This means each time I push a code change to the repo, Github notifies Cloud Run of the update, and Google Cloud Build then makes an updated docker image available to Google Cloud Run for instant re-hosting. This is a huge timesaver, since it avoids fiddling with GCP's command line interface each time you want to update your web app. 
+To simplify the app's web development, I'm using continuous deployment from the Github repo to Google Cloud Platform's Cloud Run service. This means each time I push a code change to the repo, Github notifies Cloud Build of the update, which then outputs an updated docker image available to Google Cloud Run for instant re-hosting. This is a huge timesaver, since it avoids fiddling with GCP's command line interface each time you want to update your web app. 
 
 I'll explain the main steps required to port your local app to a Cloud Run URL through the GCP interface. If you'd prefer doing it through the CLI, I outlined the [code here in the dailypi/tutorial tutorial.](/blog/2023/dailypi/tutorial_part2/)
 
 Once you're connected to GCP, navigate to the Cloud Run service, then choose "Create Service". Instead of deploying from a container registry, pick "Continuously deploy new revisions from a source repository" and go through the options to connect your Github repo. 
 
-For CPU allocation, to reduce costs, choose "CPU is only allocated during request processing", which means the app will only run when it's hit with a request. Also pick the option with no authentication, so that your Raspberry Pi can call the app's URL directly. Auth could be useful here, but Cloud Run apps should not normally be indexed by search engines, unless they are reference elsewhere. If you keep it to yourself, your URL should remain private. 
+For CPU allocation, to reduce costs, choose "CPU is only allocated during request processing", which means the app will only run when it's hit with a request. Also pick the option with no authentication, so that your Raspberry Pi can call the app's URL directly. Auth could be useful here, but Cloud Run apps should not normally be indexed by search engines, unless they are referenced elsewhere. If you keep it to yourself, your URL should remain private. 
 
 Finally, click on the create button and wait for your page to be provisioned. Make sure to also copy your app's URL to the list of your authorized redirect URLs in the "credentials" sub-menu of your GCP project.
 
@@ -195,14 +196,37 @@ Go back to your app's environment variables, and reference each secret in turn.
 - Test the app script manually through the terminal with "python .../APPLOCATION/display.py"
 - The image refresh process should take a few seconds : after a bit of flickering, the screen should display the dashboard image
 - There are detailed setup instructions (outlined in the dailypi/tutorial tutorial)[/blog/2023/dailypi/tutorial_part3/] for more information 
-- Either setup a cron job to run the display.py script at regular intervals, or if you have the PiSugar2 battery, use the wake-up script (`wave_script.sh`) to wake the Pi up at specific times of the day.
+- You can then either setup a cron job to run the display.py script at regular intervals, or if you have the PiSugar2 battery, use the provided wake-up script to power down and wake up the Pi at regular intervals.
+
+## Cron job
+
+To run scripts at regular intervals, you can create something called a cron job, which is a job scheduler for the OS. 
+
+First, make your shell scripts executable by running this on the Pi:
+
+```
+chmod +x /home/osher/.dashboard_pi_env/screen/alarm.sh 
+chmod +x /home/osher/.dashboard_pi_env/screen/display.sh
+```
+
+Then open the crontab file with `sudo crontab -e` and add the following line to the end of the file:
+`@reboot /home/osher/.dashboard_pi_env/screen/display.sh "/home/osher/.dashboard_pi_env" >> /home/osher/journal.log 2>&1`
+
+The `@reboot` directive runs the script as soon as the Pi boots up. The `display.sh` script will sync the Pi's clock to the PiSugar's RTC clock, then schedule the next wake-up alarm (via the `alarm.sh` script) and then run the `display.py` script to refresh the screen. 
+
+Be sure to modify the paths above as needed, in the following format: 
+`@reboot /path/to/script.sh "/path/to/env_folder_with_python_and_scripts" >> /path/to/logfile.log 2>&1`
+
+When debugging reboots, you might need to interrupt a planned shutdown - that can be done with `sudo shutdown -c`
 
 ## Notes
 
-- Browsers render SVG text differently - Edge seems to give a good idea of the final result on Cloud Run. Changing the font is tricky with native SVG code. 
+- Browsers render SVG text differently - Edge seems to give a good idea of the final SVG render on Cloud Run. 
+- Changing the font is tricky within native SVG code. My attempts weren't successful, which is why I opted for a monospace font. 
 - It's very important not to commit the .env file to a public repo, as it contains all of your access tokens.
-- Edit the scripts as you see fit to change the language of the dashboard, or to add/remove fields.
+- Edit the scripts as you see fit to change the language of the dashboard, or to add/remove fields - most of these will be in the svg template file.
 - In an attempt to gain extra battery life, I disabled bluetooth on the Pi. [See here for more info](https://di-marco.net/blog/it/2020-04-18-tips-disabling_bluetooth_on_raspberry_pi/)
   - You could also play with the number of daily wakes, and the length of each wake. 
+- Having errors while transferring files to the Pi with FileZilla? Make sure you're [expanding the Pi OS file system to the full size of the microSD card](https://piwithvic.com/raspberry-pi-expand-filesystem-micro-sd-card/)
 - Better battery life could undoubtedly be achieved with a Pico W or an ESP32, but that's a project for another day...
 

@@ -1,7 +1,7 @@
 ---
 layout: page #
 title: DispatchPi
-description: Share and queue eink images through Gmail
+description: Share and queue e-ink images through Gmail
 img: /assets/img/dispatchpi/pink_frame2_thumbnail.jpg
 importance: 1
 category: work
@@ -30,14 +30,13 @@ I built DispatchPi to share pictures with my fiancée, who was working in Québe
 Each frame is powered by a Raspberry Pi Zero and hooked up to a 7.5 inch Waveshare e-ink screen. Their job is to pull an image from a fixed URL at regular intervals. To exchange images, each sender uses a custom shortcut on iPhones. 
 <br>
 DispatchPi is built for a pair of picture frames, which we’ll call <strong>Satellite frame</strong> and <strong>Earth frame</strong>. The satellite frame displays images received from any sender, while the earth frame only shows from a specific sender. This filtering happens in the web app which serves each audience on a different URL endpoint. 
-<br><br>
-<span style="font-size: 40px;"><a href="https://malcolmosh.github.io/blog/2023/dispatchpi_part1/">Start the tutorial here!</a></span>
+</div>
+<div class="col-sm-4 mt-3 mt-md-0" >
+{% include figure.liquid path="assets/img/dispatchpi/frame1.gif" title="Two frames." class="img-fluid rounded z-depth-1" caption = "From start to finish"%}
+</div>
 </div>
 
-<div class="col-sm-4 mt-3 mt-md-0" >
-{% include figure.liquid path="assets/img/dispatchpi/frame1.gif" title="Two frames." class="img-fluid rounded z-depth-1" caption = "DispatchPi"%}
-</div>
-</div>
+> The **[code for DispatchPi is available here on GitHub](https://github.com/malcolmosh/dispatchPi).** and you can **[start the tutorial here](/blog/2023/dispatchpi_part1/)**. 
 
 ### Full Schema
 
