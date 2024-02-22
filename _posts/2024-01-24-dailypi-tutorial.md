@@ -1,10 +1,10 @@
 ---
 layout: post
 title: "DailyPi tutorial: display tasks, events and weather 🗓️"
-date: 2024-01-28 00:00:00-0500
-last_modified_at: 2024-01-28 00:00:00-0500
-description: A succinct tutorial. Ping me on Github for any issues!
-tags: raspberrypi
+date: 2024-02-21 00:00:00-0500
+last_modified_at: 2024-02-21 00:00:00-0500
+description: A short tutorial. Open a Github issue if you need help!
+tags: raspberrypi pizero
 categories: DailyPi
 published: true
 giscus_comments: false
@@ -17,13 +17,13 @@ toc:
 
 DailyPi is a simple e-paper dashboard that lists daily events, tasks and weather. 
 
-All data is prepared for display through a python app using the flask web framework. This web service ouputs a black and white PNG image that conforms to the exact dimensions of the e-paper screen. 
+All data is prepared for display through a python app using the flask web framework. This web service ouputs a black and white PNG image that matches the resolution of the e-paper screen. 
 
-To make development easier, I run the app on a Cloud service, Google Cloud Run. A Raspberry Pi Zero W connected to a Waveshare 7.5 in e-ink screen picks up the dashboard image and sends it to the frame for immediate display. 
+To make development easier, I run the app on Google Cloud Run. A Raspberry Pi Zero W connected to a Waveshare 7.5 in e-ink screen picks up the dashboard image for display. 
 
 Data comes from three sources : 
-- Google tasks, for the grocery list (via an API call)
-- Google calendar, for all events (via an API call)
+- Google tasks, for the grocery list (via an authenticated API call)
+- Google calendar, for all events (via an authenticated API call)
 - Environment Canada, through the [env_canada library](https://github.com/michaeldavie/env_canada)
 
 
@@ -40,7 +40,7 @@ All server code is located in the "server" subfolder of the repo, while the devi
   - `Dockerfile` : Used to build the docker image that will be deployed to Cloud Run.
   - `display_functions.py` : Various helper functions
   - `get_weather.py` : Pulls weather data
-  - `gmail_connector.py` : Pulls an image to display from Gmail (this is a feature borrowed from my other project, dailypi/tutorial, which isn't used in this project yet)
+  - `gmail_connector.py` : Pulls an image to display from Gmail (you don't need this script - it's a feature borrowed from my other project, DispatchPi, which isn't used in this project yet)
   - `eink_image.py` : Converts an image pulled from Gmail for display on the e-ink screen
   - `google_calendar.py` : Fetches events from Google Calendar
   - `google_tasks.py` : Gets tasks from Google Tasks
@@ -57,9 +57,9 @@ All server code is located in the "server" subfolder of the repo, while the devi
 
 ## Customization 
 
-Some adaptation may be required to convert the local code to another Raspberry Pi board or another e-paper screen. The dashboard itself is pretty modular, as the SVG template can be adapted to fit other screen formats or to display information differently. I recommend using [BoxySVG](https://boxy-svg.com/) to modify the file to keep all custom class names. 
+Some adaptation may be required to convert the local code to another Raspberry Pi board or e-paper screen. The dashboard itself is pretty modular, as the SVG template can be adapted to fit other screen formats or to display information differently. I recommend using [BoxySVG](https://boxy-svg.com/) to modify the file to keep all custom class names. 
 
-The SVG file serves as the graphical canvas for the dashboard. Since a SVG file can be written as code, it means we can create text variables that will be swapped out for accurate information when data is refreshed. 
+The SVG file serves as the graphical canvas for the dashboard. Since a SVG file can be written as code, it means we can create placeholder text variables that are swapped out for accurate information upon data refreshes. 
 
 ## Preparations
 
@@ -74,9 +74,9 @@ You first need to configure a few things in Google Cloud to be able to communica
   - Google Cloud Run API
   - Google Cloud Secrets Manager API
 - Create OAuth credentials
-  - You can follow [the instructions here](/blog/2023/dailypi/tutorial_part1/) for generating a json client secrets file with the proper authorizations.
+  - You can follow [the instructions here](/blog/2023/dispatchpi_part1/#create-oauth-credentials) for generating a json client secrets file with the proper authorizations.
   - Store this .json file in a handy location - you will need it soon. 
-  - **Make sure to add the authorized redirect URLs under the credentials, sub-menu, as described [here](/blog/2023/dailypi/tutorial_part1/#add-authorized-redirects)**
+  - **Make sure to add the authorized redirect URLs under the credentials, sub-menu, as described [here](/blog/2023/dispatchpi_part1/#add-authorized-redirects)**
 
 You can also create a new Gmail account if you want the calendar and tasks to live in a separate account from your personal email.
 
@@ -91,10 +91,10 @@ You can also create a new Gmail account if you want the calendar and tasks to li
   - Add your own coordinates for the weather forecast
   - Add the email address you want to use for the calendar
   - Generate a random string to server as the Flask key, which is used to encrypt the session cookies
-  - TOKEN_GMAIL, TOKEN_GTASKS and TOKEN_GCALENDAR will be generated through the script when you authorize your GCP app to have access to Gmail, Google tasks and Google calendar. 
+  - TOKEN_GMAIL, TOKEN_GTASKS and TOKEN_GCALENDAR will be created later from the app's home page. 
 
 ## A note about authentication
-The CLIENT_SECRETS_FILE and TOKEN_FILE serve different purposes in the context of OAuth 2.0 authentication:
+The CLIENT_SECRETS_FILE and each individual TOKEN_FILE serve different purposes for OAuth 2.0 authentication:
 
 CLIENT_SECRETS_FILE: This file contains the OAuth 2.0 credentials for your application, including the client ID and client secret. These values are used to identify your application when it makes requests to the OAuth 2.0 server. You obtain these values when you register your application on GCP using the steps listed above. 
 
@@ -120,7 +120,8 @@ In summary, the CLIENT_SECRETS_FILE is used to identify your application to the 
 
 You now need to generate the access tokens for Google Tasks and Google Calendar (let's leave Gmail aside for now as the dasbhoard doesn't use it.)
 
--Choose the "Test Google Calendar" link to go through the whole authorization flow, to connect your project Gmail account to your GCP application.
+> Choose the "Test Google Calendar" link to go through the whole authorization flow, to connect your project Gmail account to your GCP application
+
   - Log in to your Gmail account
   - Authorize the app to access your Google Calendar
   - You will be redirected to a page that will display the access token - copy it. 
@@ -138,9 +139,9 @@ You now need to generate the access tokens for Google Tasks and Google Calendar 
 
 ## Deploy easily on Cloud Run
 
-To simplify the app's web development, I'm using continuous deployment from the Github repo to Google Cloud Platform's Cloud Run service. This means each time I push a code change to the repo, Github notifies Cloud Build of the update, which then outputs an updated docker image available to Google Cloud Run for instant re-hosting. This is a huge timesaver, since it avoids fiddling with GCP's command line interface each time you want to update your web app. 
+To simplify the app's web development, I'm using continuous deployment from the Github repo to Google Cloud Platform's Cloud Run service. This means each time I push a code change to the repo, Github notifies Cloud Build of the update, which then repackages an updated docker image and uses it to refresh the Cloud Run server. This is a huge timesaver, since it avoids fiddling with GCP's command line interface each time you want to update your web app. 
 
-I'll explain the main steps required to port your local app to a Cloud Run URL through the GCP interface. If you'd prefer doing it through the CLI, I outlined the [code here in the dailypi/tutorial tutorial.](/blog/2023/dailypi/tutorial_part2/)
+Below are the main steps required to port your local app to a Cloud Run URL through the GCP interface. If you'd prefer doing it through the CLI, I outlined the [code here in the dailypi/tutorial tutorial.](/blog/2023/dailypi/tutorial_part2/)
 
 Once you're connected to GCP, navigate to the Cloud Run service, then choose "Create Service". Instead of deploying from a container registry, pick "Continuously deploy new revisions from a source repository" and go through the options to connect your Github repo. 
 
@@ -149,7 +150,7 @@ For CPU allocation, to reduce costs, choose "CPU is only allocated during reques
 Finally, click on the create button and wait for your page to be provisioned. Make sure to also copy your app's URL to the list of your authorized redirect URLs in the "credentials" sub-menu of your GCP project.
 
 There is [a handy tutorial here](https://cloud.google.com/run/docs/quickstarts/deploy-continuously
-) for connecting Cloud Run and Github that goes into more detail. 
+) for connecting Cloud Run and Github with additional information. 
 
 ## Add secrets and environment variables
 
@@ -182,7 +183,7 @@ Go back to your app's environment variables, and reference each secret in turn.
 
 **That's it! Your app should now work successfully on Cloud Run**
 
-{% include scripts/image_with_caption.liquid src="/assets/img/dailypi/tutorial/dashboard-result.png" alt="Dashboard image." zoomable=true caption="The PNG output of the dashboard page" %}
+{% include scripts/image_with_caption.liquid src="/assets/img/dailypi/tutorial/dashboard-result.png" alt="Dashboard image." zoomable=true caption="The final PNG output (displayed here locally, but the result on Cloud Run should be identical)" %}
 
 
 ## Testing the app on the Raspberry Pi
@@ -192,9 +193,9 @@ Go back to your app's environment variables, and reference each secret in turn.
 - Create a virtual environment 
 - Load the scripts located in the "screen" subfolder of the repo on the Raspberry Pi via an FTP client such as Filezilla
 - Install the required python libraries for the script and the Waveshare screen
-- Connect the screen to the Pi's GPIO pins
-- Test the app script manually through the terminal with "python .../APPLOCATION/display.py"
-- The image refresh process should take a few seconds : after a bit of flickering, the screen should display the dashboard image
+- Connect the screen to the Pi's GPIO pins - I used the [pin correspondence on Waveshare's website here](https://www.waveshare.com/wiki/7.5inch_e-Paper_HAT_Manual)
+- Test the app script manually through the terminal with "python .../APP_LOCATION/display.py"
+- The image refresh process should take a few seconds : after a bit of flickering, the screen will display the dashboard image
 - There are detailed setup instructions (outlined in the dailypi/tutorial tutorial)[/blog/2023/dailypi/tutorial_part3/] for more information 
 - You can then either setup a cron job to run the display.py script at regular intervals, or if you have the PiSugar2 battery, use the provided wake-up script to power down and wake up the Pi at regular intervals.
 
@@ -210,12 +211,12 @@ chmod +x /home/osher/.dashboard_pi_env/screen/display.sh
 ```
 
 Then open the crontab file with `sudo crontab -e` and add the following line to the end of the file:
+`@reboot /path/to/script.sh "/path/to/env_folder_with_python_and_scripts" >> /path/to/logfile.log 2>&1`
+
+Be sure to modify the paths above as needed. In my case, this was my full path: 
 `@reboot /home/osher/.dashboard_pi_env/screen/display.sh "/home/osher/.dashboard_pi_env" >> /home/osher/journal.log 2>&1`
 
 The `@reboot` directive runs the script as soon as the Pi boots up. The `display.sh` script will sync the Pi's clock to the PiSugar's RTC clock, then schedule the next wake-up alarm (via the `alarm.sh` script) and then run the `display.py` script to refresh the screen. 
-
-Be sure to modify the paths above as needed, in the following format: 
-`@reboot /path/to/script.sh "/path/to/env_folder_with_python_and_scripts" >> /path/to/logfile.log 2>&1`
 
 When debugging reboots, you might need to interrupt a planned shutdown - that can be done with `sudo shutdown -c`
 

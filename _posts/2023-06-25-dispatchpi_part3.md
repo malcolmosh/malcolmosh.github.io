@@ -4,7 +4,7 @@ title: "DispatchPi part 3: connect the frame 🖼️"
 date: 2023-06-25 06:00:00-0500
 last_modified_at: 2023-06-25 06:00:00-0500
 description: #an example of a blog post with table of contents on a sidebar
-tags: raspberrypi
+tags: raspberrypi pizero
 categories: DispatchPi
 giscus_comments: false
 related_posts: false
