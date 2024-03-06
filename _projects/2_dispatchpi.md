@@ -25,11 +25,11 @@ related_publications: false
 <div class="row">
 
 <div class="col-sm-8 mt-3 mt-md-0">
-I built DispatchPi to share pictures with my fiancée, who was working in Québec's remote Nunavik region, where internet is unreliable. The project consists of a pair of e-ink frames that fetch images from a Gmail inbox.
-<br>
+I built DispatchPi to share pictures with my fiancée, who was working in Québec's remote Nunavik region, where internet is unreliable. The project consists of a pair of e-ink frames that fetch images from a Gmail inbox.  
+<br><br><br>
 Each frame is powered by a Raspberry Pi Zero and hooked up to a 7.5 inch Waveshare e-ink screen. Their job is to pull an image from a fixed URL at regular intervals. To exchange images, each sender uses a custom shortcut on iPhones. 
-<br>
-DispatchPi is built for a pair of picture frames, which we’ll call <strong>Satellite frame</strong> and <strong>Earth frame</strong>. The satellite frame displays images received from any sender, while the earth frame only shows from a specific sender. This filtering happens in the web app which serves each audience on a different URL endpoint. 
+<br><br>
+DispatchPi is built for a pair of picture frames, which we’ll call <strong>Satellite frame</strong> and <strong>Earth frame</strong>. The satellite frame displays images received from any sender, while the earth frame only shows from a specific sender. This filtering happens in the web app which serves each audience on a different URL endpoint.  
 </div>
 <div class="col-sm-4 mt-3 mt-md-0" >
 {% include figure.liquid path="assets/img/dispatchpi/frame1.gif" title="Two frames." class="img-fluid rounded z-depth-1" caption = "From start to finish"%}
