@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "DailyPi tutorial: display tasks, events and weather 🗓️"
-date: 2024-03-5 00:00:00-0500
-last_modified_at: 2024-03-05 00:00:00-0500
+date: 2024-03-16 00:00:00-0500
+last_modified_at: 2024-03-16 00:00:00-0500
 description: A short tutorial. Open a Github issue if you need help!
 tags: raspberrypi pizero
 categories: DailyPi
