@@ -141,7 +141,7 @@ You now need to generate the access tokens for Google Tasks and Google Calendar 
 
 To simplify the app's web development, I'm using continuous deployment from the Github repo to Google Cloud Platform's Cloud Run service. This means each time I push a code change to the repo, Github notifies Cloud Build of the update, which then repackages an updated docker image and uses it to refresh the Cloud Run server. This is a huge timesaver, since it avoids fiddling with GCP's command line interface each time you want to update your web app. 
 
-Below are the main steps required to port your local app to a Cloud Run URL through the GCP interface. If you'd prefer doing it through the CLI, I outlined the [code here in the dailypi/tutorial tutorial.](/blog/2023/dailypi/tutorial_part2/)
+Below are the main steps required to port your local app to a Cloud Run URL through the GCP interface. If you'd prefer doing it through the CLI, I outlined the [code here in the dailypi/tutorial.](/blog/2023/dailypi/tutorial_part2/)
 
 Once you're connected to GCP, navigate to the Cloud Run service, then choose "Create Service". Instead of deploying from a container registry, pick "Continuously deploy new revisions from a source repository" and go through the options to connect your Github repo. 
 
@@ -188,8 +188,9 @@ Go back to your app's environment variables, and reference each secret in turn.
 
 ## Testing the app on the Raspberry Pi
 
-- Set up the Raspberry Pi OS on the microSD card
-- SSH into the Pi
+- There are detailed setup instructions [outlined in the dailypi tutorial](/blog/2023/dailypi/tutorial_part3/) if you aren't familiar with the steps below
+- Set up the Raspberry Pi Lite OS on the microSD card
+- SSH into the Pi via FileZilla
 - Create a virtual environment 
 - Load the scripts located in the "screen" subfolder of the repo on the Raspberry Pi via an FTP client such as Filezilla
 - Install the required python libraries for the script and the Waveshare screen
@@ -197,7 +198,6 @@ Go back to your app's environment variables, and reference each secret in turn.
 - There is also some discussion about wiring issues on the [Arduino forums here](https://forum.arduino.cc/t/gxepd2-loss-of-contrast-waveshare-e-paper-driver-hat-rev2-3/1190325/3) and [here](https://forum.arduino.cc/t/problem-esp32-waveshare-7-5-v-driver-hat-rev2-3/1230611/16) for ESP32 boards.
 - Test the app script manually through the terminal with "python .../APP_LOCATION/display.py"
 - The image refresh process should take a few seconds : after a bit of flickering, the screen will display the dashboard image
-- There are detailed setup instructions (outlined in the dailypi/tutorial tutorial)[/blog/2023/dailypi/tutorial_part3/] for more information 
 - You can then either setup a cron job to run the display.py script at regular intervals, or if you have the PiSugar2 battery, use the provided wake-up script to power down and wake up the Pi at regular intervals.
 
 ## Cron job
